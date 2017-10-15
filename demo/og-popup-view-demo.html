@@ -1,0 +1,302 @@
+<!-- Common imports -->
+<link rel="import" href="../../polymer/polymer.html" />
+
+<!-- Common demo imports -->
+<link rel="import" href="../../px-demo/px-demo-header.html" />
+<link rel="import" href="../../px-demo/px-demo-api-viewer.html" />
+<link rel="import" href="../../px-demo/px-demo-footer.html" />
+<link rel="import" href="../../px-demo/px-demo-configs.html" />
+<link rel="import" href="../../px-demo/px-demo-props.html" />
+<link rel="import" href="../../px-demo/px-demo-interactive.html" />
+<link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
+
+<!-- Imports for this component -->
+<link rel="import" href="../../px-demo/css/px-demo-styles.html" />
+<link rel="import" href="../og-popup-view.html" />
+
+<!-- Demo DOM module -->
+<dom-module id="og-popup-view-demo">
+  <template>
+    <style include="px-demo-styles" is="custom-style">
+      :host {
+        position: relative;
+      }
+      ul { padding: 0; }
+      li {
+        text-decoration: none;
+      }
+      .component {
+        position: relative;
+      }
+      .component > * {
+        display: inline-block;
+        height: 50px;
+      }
+      .component > div:nth-child(1) {
+        width: 70%;
+      }
+      .component > div:nth-last-child(1) {
+        width: 29%;
+      }
+      .view {
+        padding: 50px;
+      }
+      .btn-container {
+        position: absolute;
+        right: 0;
+        width: 300px;
+        text-align: right;
+      }
+    </style>
+
+    <!-- Header -->
+    <px-demo-header
+        module-name="og-popup-view"
+        description="The og-popup-view component is...">
+    </px-demo-header>
+
+    <!-- Interactive -->
+    <px-demo-interactive>
+      <!-- Configs -->
+      <px-demo-configs configs="[[configs]]" props="{{props}}" chosen-config="{{chosenConfig}}"></px-demo-configs>
+
+      <!-- Props -->
+      <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
+
+      <!-- Component ---------------------------------------------------------->
+      <px-demo-component>
+        <div class="component">
+          <div></div>
+          <div>
+            <og-popup-view
+              background-color="{{props.backgroundColor}}"
+              extraMargin="{{props.extraMargin}}"
+              click-able
+              stick-to-parent
+              cover-height>
+              <div slot="clickable-notification">
+                <div class="btn-container">
+                  <button class="btn">Press me!</button>
+                </div>
+              </div>
+
+              <div slot="mini-notification">
+                <div class="view">
+                  <h2>MINI VIEW</h2>
+                  <p>Mini view, use only this one if you don't need the full view.</p>
+                  <br />
+                  <ul>
+                    <li>List 1</li>
+                    <li>List 2</li>
+                    <li>List 3</li>
+                    <li>List 4</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div slot="full-notification">
+                <div class="view">
+                  <h2>FULL VIEW</h2>
+                  <p>This is the full version of the mini view.</p>
+                  <br />
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Similique voluptatibus est eaque, hic,
+                    unde dolores ipsam molestias doloremque consequuntur rerum suscipit
+                    quod sequi itaque quis aperiam cum culpa quibusdam velit?</p>
+                  <br />
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Similique voluptatibus est eaque, hic,
+                      unde dolores ipsam molestias doloremque consequuntur rerum suscipit
+                      quod sequi itaque quis aperiam cum culpa quibusdam velit?</p>
+                </div>
+              </div>
+            </og-popup-view>
+          </div>
+        </div>
+      </px-demo-component>
+      <!-- END Component ------------------------------------------------------>
+
+      <px-demo-component-snippet
+          element-properties="{{props}}"
+          element-name="og-popup-view">
+      </px-demo-component-snippet>
+    </px-demo-interactive>
+
+    <!-- API Viewer -->
+    <px-demo-api-viewer source="og-popup-view"></px-demo-api-viewer>
+
+    <!-- Footer -->
+    <px-demo-footer></px-demo-footer>
+
+  </template>
+
+</dom-module>
+<script>
+  Polymer({
+    is: 'og-popup-view-demo',
+
+    properties: {
+
+      /**
+       * Note: The actual data/values for `props` are placed in `this.demoProps`
+       * to create a static reference that Polymer shouldn't overwrite.
+       *
+       * On object containing all the properties the user can configure for this
+       * demo. Usually a pretty similar copy of the component's `properties` block
+       * with some additional sugar added to describe what kind of input the
+       * user will be shown and how that input should be configured.
+       *
+       * Note that `value` for each property is the default that will be set
+       * unless a config from `configs` is applied by default.
+       *
+       * @example
+       *
+       * `demoProps` is an object containing multiple objects. Each sub-object has
+       * should have a key with the name of the configurable property, and a set
+       * of values that describe that property. At a high level, you might have:
+       *
+       * ```
+       *     {
+       *       preventRangeSelection: { ... },
+       *       displayMode: { ... },
+       *       blockDatesBefore: { ... }
+       *     }
+       * ```
+       *
+       * Each sub-object should contain information about the configurable property's
+       * `type` (a reference to the JavaScript literal), a default value, and a set
+       * of additional keys that describe the input it can be changed with.
+       * The following inputs types are currently available:
+       *
+       * - 'toggle' - A toggle switch input to set Boolean values
+       * - 'text' - A simple single-line text input to set String or stringified Array/Object values
+       * - 'dropdown' - A dropdown picker that can be used to select any kind of value from a list of available options
+       *
+       * Full examples for each input:
+       *
+       * ```
+       *     {
+       *       preventRangeSelection: {
+       *         type: Boolean,
+       *         value: false,
+       *         inputType: 'toggle'
+       *       },
+       *       displayMode: {
+       *         type: String,
+       *         value: 'day',
+       *         inputType: 'dropdown',
+       *         inputChoices: ['day', 'month', 'year']
+       *       },
+       *       blockDatesBefore: {
+       *         type: String,
+       *         value: '2016-10-10T00:00:00.000Z',
+       *         inputType: 'text',
+       *         inputPlaceholder: 'ISO 8601 String'
+       *       }
+       *     }
+       * ```
+       *
+       * By default, the configurable property names are converted from camelCase
+       * to Title Case and used as input labels (e.g. 'displayMode' -> 'Display Mode').
+       * Labels can be set manually through the key `inputLabel`:
+       *
+       * ```
+       *     {
+       *       preventRangeSelection: {
+       *         type: Boolean,
+       *         value: false,
+       *         inputType: 'toggle',
+       *         inputLabel: "Stop range selection"
+       *       }
+       *     }
+       * ```
+       *
+       * @property demoProps
+       * @type {Object}
+       */
+      props: {
+        type: Object,
+        value: function(){ return this.demoProps; }
+      },
+
+      /**
+       * An array of pre-configured `props` that can be used to provide the user
+       * with a set of common examples. These configs will be made available
+       * as a set of tabs the user can click that will automatically change
+       * the `props` to specific values.
+       *
+       * @example
+       *
+       * Each config is an object. Its keys should be the names of the configurable
+       * properties defined in your `demoProps` above. Each key's value should
+       * be the new prop value for the configuration. You can also include these
+       * optional keys:
+       *
+       * - `configName` - a String value that will be used for the title of the tab
+       * - `configReset` - a Boolean, if `true` resets all props (even those not specified in the config) when this config is selected. Defaults to `false`.
+       *
+       * Example of two configs:
+       *
+       * ```
+       *     [
+       *       {
+       *         configName: "Basic",
+       *         preventRangeSelection: true,
+       *         displayMode: 'year',
+       *         blockDatesBefore: '2016-10-10T00:00:00.000Z'
+       *       },
+       *       {
+       *         configName: "Advanced",
+       *         preventRangeSelection: false,
+       *         displayMode: 'day',
+       *         blockDatesBefore: '2010-10-10T00:00:00.000Z'
+       *       }
+       *     ]
+       * ```
+       *
+       * @property demoProps
+       * @type {Array}
+       */
+      configs: {
+        type: Array,
+        value: function(){
+          return [
+            { configName: "Default",
+              configReset: true }
+          ]
+        }
+      }
+    },
+
+    /**
+     * A reference for `this.props`. Read the documentation there.
+     */
+    demoProps: {
+      backgroundColor: {
+        type: Number,
+        defaultValue: '#f7f9f9',
+        inputType: 'text'
+      },
+      extraMargin: {
+        type: Number,
+        defaultValue: 80,
+        inputType: 'text'
+      },
+      clickAble: {
+        type: Boolean,
+        defaultValue: true,
+        inputType: 'toggle'
+      },
+      stickToParent: {
+        type: Boolean,
+        defaultValue: true,
+        inputType: 'toggle'
+      },
+      coverHeight: {
+        type: Boolean,
+        defaultValue: true,
+        inputType: 'toggle'
+      },
+    }
+  });
+</script>

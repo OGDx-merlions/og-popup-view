@@ -1,0 +1,80 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
+    'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+
+<link rel="import" href="css/og-popup-view-styles.html">
+
+<link rel="import" href="../app-layout/app-drawer/app-drawer.html">
+
+<!--
+REPLACE THIS TEXT WITH A COMPONENT DESCRIPTION
+
+### Usage
+
+    <og-popup-view counter-value="1"></og-popup-view>
+
+@element og-popup-view
+@blurb Extend a popup like notification in your view from clicking an area
+@homepage index.html
+@demo index.html
+-->
+
+<dom-module id="og-popup-view">
+  <style include="og-popup-view-styles">
+    :host {
+      --app-drawer-scrim-background: transparent;
+      width: 100%;
+    }
+    :host #drawer {
+      z-index: 10;
+      top: 0;
+      text-align: left;
+    }
+    .close-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 20px 27px;
+      z-index: 1;
+      background-color: #fff;
+    }
+    .close-btn:hover, .clickable-area:hover {
+      cursor: pointer;
+    }
+  </style>
+  <template>
+    <div style="width: 100%;">
+      <div onclick="drawer.toggle()" class="clickable-area">
+        <slot name="clickable-notification"></slot>
+      </div>
+
+      <app-drawer
+        id="drawer"
+        align="right"
+        on-tap="_isResetingFromBackground">
+
+        <div id="drawer-main-container">
+          <div on-click="closing" class="close-btn"><px-icon icon="px-utl:close"></px-icon></div>
+
+          <!-- 1rst screen -->
+          <template is="dom-if" if="{{!secondScreen}}">
+            <div on-tap="_extendDrawer">
+              <slot name="mini-notification"></slot>
+            </div>
+          </template>
+
+          <!-- 2nd screen -->
+          <template is="dom-if" if="{{secondScreen}}">
+            <div>
+              <slot name="full-notification"></slot>
+            </div>
+          </template>
+        </div>
+      </app-drawer>
+    </div>
+  </template>
+  <script src="dist/og-popup-view.js"></script>
+</dom-module>
