@@ -10,11 +10,32 @@
 <link rel="import" href="../app-layout/app-drawer/app-drawer.html">
 
 <!--
-REPLACE THIS TEXT WITH A COMPONENT DESCRIPTION
+The og-popup-view is a component that will draw a popup from the side, it is an extention of the app-layout/app-drawer component with a feature to extend it to some size.
+The component allows setting up properties as well as defining its containing views
 
 ### Usage
 
-    <og-popup-view counter-value="1"></og-popup-view>
+    <og-popup-view
+      background-color="#ccc"
+      click-able
+      stick-to-parent>
+
+      // Define here the clickable tab/area
+      <div slot="clickable-notification">
+        <button>Press me!</button>
+      </div>
+
+      // Set content here for the small view of the popup
+      <div slot="mini-notification">
+        ...
+      </div>
+
+      // If you want to enable the full view, set its content inside this.
+      <div slot="full-notification">
+        ...
+      </div>
+
+    </og-popup-view>
 
 @element og-popup-view
 @blurb Extend a popup like notification in your view from clicking an area
@@ -54,20 +75,21 @@ REPLACE THIS TEXT WITH A COMPONENT DESCRIPTION
       <app-drawer
         id="drawer"
         align="right"
+        disable-swipe="[[disableDrawerSwipe]]"
         on-tap="_isResetingFromBackground">
 
         <div id="drawer-main-container">
           <div on-click="closing" class="close-btn"><px-icon icon="px-utl:close"></px-icon></div>
 
           <!-- 1rst screen -->
-          <template is="dom-if" if="{{!secondScreen}}">
+          <template is="dom-if" if="{{!_secondScreen}}">
             <div on-tap="_extendDrawer">
               <slot name="mini-notification"></slot>
             </div>
           </template>
 
           <!-- 2nd screen -->
-          <template is="dom-if" if="{{secondScreen}}">
+          <template is="dom-if" if="{{_secondScreen}}">
             <div>
               <slot name="full-notification"></slot>
             </div>

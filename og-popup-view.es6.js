@@ -5,17 +5,6 @@
 
     properties: {
       /**
-      * This property check the state of screen, if false, it means the state is in first screen which is the default value.
-      *
-      * @property secondScreen
-      */
-      secondScreen: {
-        type: Boolean,
-        notify:true,
-        value: false,
-      },
-
-      /**
       * This property enable the second screen display.
       *
       * @property clickAble
@@ -46,13 +35,23 @@
       },
 
       /**
-      * This property defines the background color, default is "#f7f9f9", value is an HEX base
+      * This property will render the component below its parent if enabled.
+      *
+      * @property disableDrawerSwipe
+      */
+      disableDrawerSwipe: {
+        type: Boolean,
+        defaultValue: false,
+      },
+
+      /**
+      * This property defines the background color, value is an HEX base
       *
       * @property backgroundColor
       */
       backgroundColor: {
         type: String,
-        value: "#f7f9f9",
+        defaultValue: "#fff",
       },
 
       /**
@@ -73,7 +72,18 @@
       extraMargin: {
         type: Number,
         value: 0,
-      }
+      },
+
+      /**
+      * This property check the state of screen, if false, it means the state is in first screen which is the default value.
+      *
+      * @property _secondScreen
+      */
+      _secondScreen: {
+        type: Boolean,
+        notify:true,
+        value: false,
+      },
     },
 
     attached: function () {
@@ -111,8 +121,8 @@
       }
 
       this._createListeners("resize", function () {
-        if (!context.secondScreen) {
-          context._resetStates();
+        if (!context._secondScreen) {
+          context.resetStates();
         }
       });
     },
@@ -133,37 +143,26 @@
     */
     _isResetingFromBackground: function(e) {
       if (e.target.id === 'scrim') {
-        this._resetStates();
+        this.resetStates();
       }
       // drawer.close();
     },
 
     /**
-    * Actual reset states that init the component from the start point.
-    *
-    * @method _resetStates
-    */
-    _resetStates: function() {
-      const containerWidth = window.innerWidth - this.parentNode.getBoundingClientRect().left;
-
-      this._updateView(`${containerWidth}px`);
-      this.secondScreen = false;
-    },
-
-    /**
-    * Method callback listener for the tap/click action
+    * Method callback listener for the tap/click action if click-able is true.
     *
     * @method _extendDrawer
     */
-    _extendDrawer: function(e, i){
+    _extendDrawer: function(){
       if (this.clickAble) {
         this._updateView(this.fullScreenSize);
-        this.secondScreen = true;
+        this._secondScreen = true;
+        this.disableDrawerSwipe = true;
       }
     },
 
     /**
-    * Increments the counter
+    * View is update from its scale with for second screen on tap.
     *
     * @method _updateView
     */
@@ -173,13 +172,26 @@
     },
 
     /**
-    * Increments the counter
+    * Directly access drawer and close it and reset states of the component.
     *
     * @method closing
     */
     closing: function() {
-      this._resetStates();
+      this.resetStates();
       drawer.close();
+    },
+
+    /**
+    * Reset component states.
+    *
+    * @method resetStates
+    */
+    resetStates: function() {
+      const containerWidth = window.innerWidth - this.parentNode.getBoundingClientRect().left;
+
+      this._updateView(`${containerWidth}px`);
+      this._secondScreen = false;
+      this.disableDrawerSwipe = false;
     },
   });
 })();

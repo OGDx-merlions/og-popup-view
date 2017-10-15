@@ -69,8 +69,9 @@
           <div></div>
           <div>
             <og-popup-view
-              background-color="{{props.backgroundColor}}"
-              extraMargin="{{props.extraMargin}}"
+              background-color="#f7f9f9"
+              extra-margin="80"
+              full-screen-size="50%"
               click-able
               stick-to-parent
               cover-height>
@@ -272,6 +273,11 @@
      * A reference for `this.props`. Read the documentation there.
      */
     demoProps: {
+      fullScreenSize: {
+        type: String,
+        defaultValue: "50%",
+        inputType: 'text'
+      },
       backgroundColor: {
         type: Number,
         defaultValue: '#f7f9f9',
@@ -295,6 +301,11 @@
       coverHeight: {
         type: Boolean,
         defaultValue: true,
+        inputType: 'toggle'
+      },
+      disableDrawerSwipe: {
+        type: Boolean,
+        defaultValue: false,
         inputType: 'toggle'
       },
     }

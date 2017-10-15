@@ -31,7 +31,28 @@ Second, import the component to your application with the following tag in your 
 Finally, use the component in your application:
 
 ```
-Insert Your demo code here.
+  <og-popup-view
+    background-color="#ccc"
+    click-able
+    stick-to-parent>
+
+    // Define here the clickable tab/area
+    <div slot="clickable-notification">
+      <button>Press me!</button>
+    </div>
+
+    // Set content here for the small view of the popup
+    <div slot="mini-notification">
+      ...
+    </div>
+
+    // If you want to enable the full view, set its content inside this.
+    <div slot="full-notification">
+      ...
+    </div>
+
+  </og-popup-view>
+
 ```
 
 <br />
@@ -39,7 +60,7 @@ Insert Your demo code here.
 
 ## Documentation
 
-Read the full API and view the demo [here](https://predixdev.github.io/og-popup-view).
+Read the full API and view the demo [here](https://github.com/OGDx-merlions/og-popup-view).
 
 The documentation in this repository is supplemental to the official Predix documentation, which is continuously updated and maintained by the Predix documentation team. Go to [http://predix.io](http://predix.io)  to see the official Predix documentation.
 
