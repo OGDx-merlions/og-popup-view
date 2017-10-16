@@ -27,6 +27,10 @@
       *
       * @property extraMargin
       */extraMargin:{type:Number,value:0},/**
+      * This property will hide/show the back button when being in the second screen
+      *
+      * @property backButton
+      */backButton:{type:Boolean,value:false},/**
       * This property check the state of screen, if false, it means the state is in first screen which is the default value.
       *
       * @property _secondScreen
@@ -47,7 +51,7 @@
     * View is update from its scale with for second screen on tap.
     *
     * @method _updateView
-    */_updateView:function _updateView(scale){this.customStyle["--app-drawer-width"]=scale;this.updateStyles()},/**
+    */_updateView:function _updateView(){var scale=arguments.length>0&&arguments[0]!==undefined?arguments[0]:0;this.customStyle["--app-drawer-width"]=scale;this.updateStyles()},/**
     * Directly access drawer and close it and reset states of the component.
     *
     * @method closing
@@ -55,5 +59,9 @@
     * Reset component states.
     *
     * @method resetStates
-    */resetStates:function resetStates(){var containerWidth=window.innerWidth-this.parentNode.getBoundingClientRect().left;this._updateView(containerWidth+"px");this._secondScreen=false;this.disableDrawerSwipe=false}})})();
+    */resetStates:function resetStates(){var containerWidth=window.innerWidth-this.parentNode.getBoundingClientRect().left;this._updateView(containerWidth+"px");this._secondScreen=false;this.disableDrawerSwipe=false},/**
+    * Method allowing getting back to first screen.
+    *
+    * @method backToSmall
+    */backToSmall:function backToSmall(){this.resetStates()}})})();
 //# sourceMappingURL=og-popup-view.js.map

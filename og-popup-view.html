@@ -54,15 +54,19 @@ The component allows setting up properties as well as defining its containing vi
       top: 0;
       text-align: left;
     }
-    .close-btn {
+    .close-btn, .back-btn {
       position: absolute;
       top: 0;
       right: 0;
       margin: 20px 27px;
       z-index: 1;
-      background-color: #fff;
     }
-    .close-btn:hover, .clickable-area:hover {
+    .back-btn {
+      right: 40px;
+    }
+    .close-btn:hover,
+    .back-btn:hover,
+    .clickable-area:hover {
       cursor: pointer;
     }
   </style>
@@ -91,6 +95,9 @@ The component allows setting up properties as well as defining its containing vi
           <!-- 2nd screen -->
           <template is="dom-if" if="{{_secondScreen}}">
             <div>
+              <template is="dom-if" if="{{backButton}}">
+                  <div on-click="backToSmall" class="back-btn"><px-icon icon="px-utl:chevron-right"></px-icon></div>
+              </template>
               <slot name="full-notification"></slot>
             </div>
           </template>

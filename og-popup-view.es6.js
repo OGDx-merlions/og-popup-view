@@ -75,6 +75,16 @@
       },
 
       /**
+      * This property will hide/show the back button when being in the second screen
+      *
+      * @property backButton
+      */
+      backButton: {
+        type: Boolean,
+        value: false,
+      },
+
+      /**
       * This property check the state of screen, if false, it means the state is in first screen which is the default value.
       *
       * @property _secondScreen
@@ -93,6 +103,8 @@
       const drawerMainContainer = document.getElementById("drawer-main-container");
       const containerBox = context.parentNode.getBoundingClientRect();
       const containerSize = containerBox.top + containerBox.height + context.extraMargin;
+      const containerWidth = window.innerWidth - context.parentNode.getBoundingClientRect().left;
+
       contentContainer.style.marginTop = `${containerSize}px`;
       contentContainer.style.padding = 0;
       if (!this.coverHeight) {
@@ -102,6 +114,8 @@
       contentContainer.style.boxShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.5)";
       closeBtn.style.backgroundColor = context.backgroundColor;
       contentContainer.style.overflow = "initial";
+
+      this._updateView(`${containerWidth}px`);
 
       if (!this.stickToParent) {
         contentContainer.style.marginTop = 0;
@@ -166,7 +180,7 @@
     *
     * @method _updateView
     */
-    _updateView: function(scale) {
+    _updateView: function(scale = 0) {
       this.customStyle["--app-drawer-width"] = scale;
       this.updateStyles();
     },
@@ -192,6 +206,15 @@
       this._updateView(`${containerWidth}px`);
       this._secondScreen = false;
       this.disableDrawerSwipe = false;
+    },
+
+    /**
+    * Method allowing getting back to first screen.
+    *
+    * @method backToSmall
+    */
+    backToSmall: function() {
+      this.resetStates();
     },
   });
 })();
