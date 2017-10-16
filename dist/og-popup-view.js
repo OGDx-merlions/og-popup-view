@@ -38,7 +38,7 @@
       * This property set the width from the parent width
       *
       * @property parentWidth
-      */parentWidth:{type:Number,defaultValue:500,notify:true,observer:"_updateWidth",value:500}},attached:function attached(){var context=this;var contentContainer=document.getElementById("contentContainer");var closeBtn=document.querySelector(".close-btn");var drawerMainContainer=document.getElementById("drawer-main-container");var containerBox=context.parentNode.getBoundingClientRect();var containerSize=containerBox.top+containerBox.height+context.extraMargin;var containerWidth=context.parentWidth;if(containerWidth<500){containerWidth=500}contentContainer.style.marginTop=containerSize+"px";contentContainer.style.padding=0;if(!this.coverHeight){contentContainer.style.bottom="initial"}contentContainer.style.backgroundColor=context.backgroundColor;contentContainer.style.boxShadow="0 2px 4px 0 rgba(0, 0, 0, 0.5)";closeBtn.style.backgroundColor=context.backgroundColor;contentContainer.style.overflow="initial";this._updateView(containerWidth+"px");if(!this.stickToParent){contentContainer.style.marginTop=0;contentContainer.style.overflow="auto"}else{this._createListeners("scroll",function(){var scrollY=window.scrollY;if(scrollY>=containerSize){contentContainer.style.marginTop=0;contentContainer.style.overflow="auto";return}contentContainer.style.marginTop=containerSize-scrollY+"px";contentContainer.style.overflow="initial"})}this._createListeners("resize",function(){if(!context._secondScreen){context.resetStates()}})},/**
+      */parentWidth:{type:Number,defaultValue:350,notify:true,observer:"_updateWidth",value:350}},attached:function attached(){var context=this;var contentContainer=document.getElementById("contentContainer");var closeBtn=document.querySelector(".close-btn");var drawerMainContainer=document.getElementById("drawer-main-container");var containerBox=context.parentNode.getBoundingClientRect();var containerSize=containerBox.top+containerBox.height+context.extraMargin;var containerWidth=context.parentWidth;if(containerWidth<350){containerWidth=350}contentContainer.style.marginTop=containerSize+"px";contentContainer.style.padding=0;if(!this.coverHeight){contentContainer.style.bottom="initial"}contentContainer.style.backgroundColor=context.backgroundColor;contentContainer.style.boxShadow="0 2px 4px 0 rgba(0, 0, 0, 0.5)";closeBtn.style.backgroundColor=context.backgroundColor;contentContainer.style.overflow="initial";this._updateView(containerWidth+"px");if(!this.stickToParent){contentContainer.style.marginTop=0;contentContainer.style.overflow="auto"}else{this._createListeners("scroll",function(){var scrollY=window.scrollY;if(scrollY>=containerSize){contentContainer.style.marginTop=0;contentContainer.style.overflow="auto";return}contentContainer.style.marginTop=containerSize-scrollY+"px";contentContainer.style.overflow="initial"})}this._createListeners("resize",function(){if(!context._secondScreen){context.resetStates()}})},/**
     * Create listeners
     *
     * @method _createListeners
@@ -63,7 +63,7 @@
     * Reset component states.
     *
     * @method resetStates
-    */resetStates:function resetStates(){var containerWidth=window.innerWidth-this.parentNode.getBoundingClientRect().left;if(containerWidth<500){containerWidth=500}this._updateView(containerWidth+"px");this._secondScreen=false;this.disableDrawerSwipe=false},/**
+    */resetStates:function resetStates(){var containerWidth=window.innerWidth-this.parentNode.getBoundingClientRect().left;if(containerWidth<350){containerWidth=350}this._updateView(containerWidth+"px");this._secondScreen=false;this.disableDrawerSwipe=false},/**
     * Method allowing getting back to first screen.
     *
     * @method backToSmall
@@ -71,5 +71,5 @@
     * Method allowing getting back to first screen.
     *
     * @method _updateWidth
-    */_updateWidth:function _updateWidth(newVal){if(newVal<500){this._updateView("500px")}}})})();
+    */_updateWidth:function _updateWidth(newVal){if(newVal<350){this._updateView("350px")}}})})();
 //# sourceMappingURL=og-popup-view.js.map
