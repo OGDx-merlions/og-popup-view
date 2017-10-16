@@ -243,7 +243,7 @@
     */
     _updateWidth: function(newVal) {
       if (newVal < 350) {
-        this._updateView("350");
+        this._updateView("350px");
       }
     },
   });
