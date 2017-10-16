@@ -102,10 +102,10 @@
       */
       parentWidth: {
         type: Number,
-        defaultValue: 500,
+        defaultValue: 350,
         notify: true,
         observer: '_updateWidth',
-        value: 500,
+        value: 350,
       },
     },
 
@@ -117,8 +117,8 @@
       const containerBox = context.parentNode.getBoundingClientRect();
       const containerSize = containerBox.top + containerBox.height + context.extraMargin;
       let containerWidth = context.parentWidth;
-      if (containerWidth < 500) {
-        containerWidth = 500;
+      if (containerWidth < 350) {
+        containerWidth = 350;
       }
 
       contentContainer.style.marginTop = `${containerSize}px`;
@@ -218,8 +218,8 @@
     */
     resetStates: function() {
       let containerWidth = window.innerWidth - this.parentNode.getBoundingClientRect().left;
-      if (containerWidth < 500) {
-        containerWidth = 500;
+      if (containerWidth < 350) {
+        containerWidth = 350;
       }
 
       this._updateView(`${containerWidth}px`);
@@ -242,8 +242,8 @@
     * @method _updateWidth
     */
     _updateWidth: function(newVal) {
-      if (newVal < 500) {
-        this._updateView("500px");
+      if (newVal < 350) {
+        this._updateView("350");
       }
     },
   });
