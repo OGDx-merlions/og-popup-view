@@ -94,6 +94,19 @@
         notify:true,
         value: false,
       },
+
+      /**
+      * This property set the width from the parent width
+      *
+      * @property parentWidth
+      */
+      parentWidth: {
+        type: Number,
+        defaultValue: 500,
+        notify: true,
+        observer: '_updateWidth',
+        value: 500,
+      },
     },
 
     attached: function () {
@@ -103,7 +116,10 @@
       const drawerMainContainer = document.getElementById("drawer-main-container");
       const containerBox = context.parentNode.getBoundingClientRect();
       const containerSize = containerBox.top + containerBox.height + context.extraMargin;
-      const containerWidth = window.innerWidth - context.parentNode.getBoundingClientRect().left;
+      let containerWidth = context.parentWidth;
+      if (containerWidth < 500) {
+        containerWidth = 500;
+      }
 
       contentContainer.style.marginTop = `${containerSize}px`;
       contentContainer.style.padding = 0;
@@ -201,7 +217,10 @@
     * @method resetStates
     */
     resetStates: function() {
-      const containerWidth = window.innerWidth - this.parentNode.getBoundingClientRect().left;
+      let containerWidth = window.innerWidth - this.parentNode.getBoundingClientRect().left;
+      if (containerWidth < 500) {
+        containerWidth = 500;
+      }
 
       this._updateView(`${containerWidth}px`);
       this._secondScreen = false;
@@ -215,6 +234,17 @@
     */
     backToSmall: function() {
       this.resetStates();
+    },
+
+    /**
+    * Method allowing getting back to first screen.
+    *
+    * @method _updateWidth
+    */
+    _updateWidth: function(newVal) {
+      if (newVal < 500) {
+        this._updateView("500px");
+      }
     },
   });
 })();
