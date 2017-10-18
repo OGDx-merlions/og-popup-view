@@ -58,11 +58,11 @@ The component allows setting up properties as well as defining its containing vi
       position: absolute;
       top: 0;
       right: 0;
-      margin: 20px 27px;
+      margin: 1.25rem 1.6875rem;
       z-index: 1;
     }
     .back-btn {
-      right: 40px;
+      right: 2.5rem;
     }
     .close-btn:hover,
     .back-btn:hover,
@@ -86,21 +86,17 @@ The component allows setting up properties as well as defining its containing vi
           <div on-click="closing" class="close-btn"><px-icon icon="px-utl:close"></px-icon></div>
 
           <!-- 1rst screen -->
-          <template is="dom-if" if="{{!_secondScreen}}">
-            <div on-tap="_extendDrawer">
-              <slot name="mini-notification"></slot>
-            </div>
-          </template>
+          <div hidden$="{{_secondScreen}}" on-tap="_extendDrawer">
+            <slot name="mini-notification"></slot>
+          </div>
 
           <!-- 2nd screen -->
-          <template is="dom-if" if="{{_secondScreen}}">
-            <div>
-              <template is="dom-if" if="{{backButton}}">
-                  <div on-click="backToSmall" class="back-btn"><px-icon icon="px-utl:chevron-right"></px-icon></div>
-              </template>
-              <slot name="full-notification"></slot>
+          <div hidden$="{{!_secondScreen}}">
+            <div hidden$="{{!backButton}}" on-click="backToSmall" class="back-btn">
+              <px-icon icon="px-utl:chevron-right"></px-icon>
             </div>
-          </template>
+            <slot name="full-notification"></slot>
+          </div>
         </div>
       </app-drawer>
     </div>

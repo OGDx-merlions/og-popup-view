@@ -39,7 +39,8 @@
         width: 29%;
       }
       .view {
-        padding: 50px;
+        margin: 50px 50px 200px;
+        overflow: auto;
       }
       .btn-container {
         position: absolute;
@@ -70,10 +71,11 @@
           <div>
             <og-popup-view
               background-color="#f7f9f9"
-              extra-margin="80"
+              extra-margin="-300"
               full-screen-size="50%"
               parent-width="100"
               click-able
+              back-button
               stick-to-parent
               cover-height>
               <div slot="clickable-notification">
@@ -82,49 +84,45 @@
                 </div>
               </div>
 
-              <div slot="mini-notification">
-                <div class="view">
-                  <h2>MINI VIEW</h2>
-                  <p>
-                    Mini view, use only this one if you don't need the full view.
-                    It is by default swipeable.
-                  </p>
-                  <br />
-                  <h3>Example:</h3>
-                  <ul>
-                    <li>List 1</li>
-                    <li>List 2</li>
-                    <li>List 3</li>
-                    <li>List 4</li>
-                    <li>List 5</li>
-                    <li>List 6</li>
-                    <li>List 7</li>
-                    <li>List 8</li>
-                    <li>List 9</li>
-                    <li>List 10</li>
-                  </ul>
-                </div>
+              <div class="view" slot="mini-notification">
+                <h2>MINI VIEW</h2>
+                <p>
+                  Mini view, use only this one if you don't need the full view.
+                  It is by default swipeable.
+                </p>
+                <br />
+                <h3>Example:</h3>
+                <ul>
+                  <li>List 1</li>
+                  <li>List 2</li>
+                  <li>List 3</li>
+                  <li>List 4</li>
+                  <li>List 5</li>
+                  <li>List 6</li>
+                  <li>List 7</li>
+                  <li>List 8</li>
+                  <li>List 9</li>
+                  <li>List 10</li>
+                </ul>
               </div>
 
-              <div slot="full-notification">
-                <div class="view">
-                  <h2>FULL VIEW</h2>
-                  <p>
-                    This is the full version of the mini view.
-                    This view can be an detailed version of the mini view.
-                  </p>
-                  <br />
-                  <h3>Example:</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Similique voluptatibus est eaque, hic,
-                    unde dolores ipsam molestias doloremque consequuntur rerum suscipit
-                    quod sequi itaque quis aperiam cum culpa quibusdam velit?
-                  </p>
-                  <br />
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                  </p>
-                  <br />
-                </div>
+              <div class="view" slot="full-notification">
+                <h2>FULL VIEW</h2>
+                <p>
+                  This is the full version of the mini view.
+                  This view can be an detailed version of the mini view.
+                </p>
+                <br />
+                <h3>Example:</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Similique voluptatibus est eaque, hic,
+                  unde dolores ipsam molestias doloremque consequuntur rerum suscipit
+                  quod sequi itaque quis aperiam cum culpa quibusdam velit?
+                </p>
+                <br />
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+                <br />
               </div>
             </og-popup-view>
           </div>

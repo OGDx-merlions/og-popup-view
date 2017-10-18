@@ -71,6 +71,7 @@
       */
       extraMargin: {
         type: Number,
+        defaultValue: 0,
         value: 0,
       },
 
@@ -120,7 +121,6 @@
       if (containerWidth < 350) {
         containerWidth = 350;
       }
-
       contentContainer.style.marginTop = `${containerSize}px`;
       contentContainer.style.padding = 0;
       if (!this.coverHeight) {
@@ -154,6 +154,9 @@
         if (!context._secondScreen) {
           context.resetStates();
         }
+        else  {
+          context._extendDrawer();
+        }
       });
     },
 
@@ -185,9 +188,13 @@
     */
     _extendDrawer: function(){
       if (this.clickAble) {
-        this._updateView(this.fullScreenSize);
+        let fullSize = this.fullScreenSize;
+        if (window.innerWidth < 720) {
+          fullSize = "100%";
+        }
+        this._updateView(fullSize);
         this._secondScreen = true;
-        this.disableDrawerSwipe = true;
+        // this.disableDrawerSwipe = true;
       }
     },
 
@@ -224,7 +231,7 @@
 
       this._updateView(`${containerWidth}px`);
       this._secondScreen = false;
-      this.disableDrawerSwipe = false;
+      // this.disableDrawerSwipe = false;
     },
 
     /**
@@ -246,5 +253,18 @@
         this._updateView("350px");
       }
     },
+
+    listeners: {
+      'app-drawer-transitioned': '_drawerSlide',
+    },
+
+    /**
+    * Callback listener to app-drawer-transitioned from app-drawer component will reset states
+    *
+    * @method _drawerSlide
+    */
+    _drawerSlide: function(e) {
+      this.resetStates();
+    }
   });
 })();
